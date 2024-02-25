@@ -1,5 +1,6 @@
 package action;
 
+import io.cucumber.datatable.DataTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -189,15 +190,28 @@ public class Base {
     }
 
 
-    public void  pCompareWordWithText(List<WebElement> elements, String expectedWord) {
+
+    public void pCompareWordWithText(List<WebElement> elements, DataTable expectedWordsTable) {
+        List<String> expectedWords = expectedWordsTable.asList(String.class);
+        System.out.println(expectedWords);
+
         for (WebElement element : elements) {
             String actualText = element.getText().trim();
-            if (actualText.equals(expectedWord.trim())) {
-                System.out.println("Element text '" + actualText + "' matches the expected word '" + expectedWord + "'.");
-            }
-        }
-        System.out.println("None of the elements have text matching the expected word '" + expectedWord + "'.");
+            System.out.println("Im the actual text from the element " + actualText);
 
+            for (String data : expectedWords) {
+                String actualData = data;
+                System.out.println("Im the actual text from the data " + actualData);
+                // Check if any word in the expectedWords list is present in the actualText
+                if (actualText.equals(actualData.trim())) {
+                    System.out.println("Element text '" + actualText + " equals to valid data " + actualData);
+                    // If you want to break out of the loop once a match is found, you can add a break statement here.
+                }
+            }
+
+
+        }
+        System.out.println("Comparison incompleted.");
     }
 
     public void pListAmenities(List <WebElement> elements){

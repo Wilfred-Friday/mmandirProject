@@ -59,7 +59,8 @@ public class Mmandir_Boys_Elements {
     }
 
     @FindBys({
-            @FindBy(xpath = "//body/div[@id='perspective']/div[@id='wrapper']/div[@id='page-content-wrapper']/div[1]/div[1]/div[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section/div/div/div")
+            @FindBy(xpath = "//body/div[@id='perspective']/div[@id='wrapper']/div[@id='page-content-wrapper']/div[1]/div[1]/div[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section/div/div/div"),
+            @FindBy(tagName = "h3")
     }) public List <WebElement> pAmenities2;
 
 
