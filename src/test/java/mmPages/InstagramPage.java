@@ -11,8 +11,11 @@ public class InstagramPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//div[@class='_aagx']")
+    @FindBy(xpath = "(//a[@role='link'])[8]")
     public WebElement pInstaLogo;
+
+    @FindBy(xpath = "//button[@class='_abn5 _abn6 _aa5h']")
+    public WebElement pClose;
 
 
 }

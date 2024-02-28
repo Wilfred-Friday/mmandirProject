@@ -45,6 +45,12 @@ public class Mmandir_Boys_Elements {
     @FindBy(xpath = "(//textarea[@id='ff_4_message'])[1]")
     public WebElement pTextArea;
 
+    @FindBy(xpath = "(//div[@class='elementor-widget-container']/a/img)[2]")
+    public WebElement pLogo;
+
+
+
+
     public WebElement pDaySelection(WebDriver driver, int day){
         return driver.findElement(By.xpath("//div[@class='dayContainer']/span[contains(text(),"+day+")]"));
     }

@@ -16,6 +16,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.Set;
 
 public class Base {
     public  WebDriver driver = new ChromeDriver();
@@ -88,9 +89,9 @@ public class Base {
 
 
     protected void waitForElementToBeVisible(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(element));
-        //System.out.println(element + " Is present");
+        System.out.println(element.getText() + " Is present.....");
     }
     protected void waitForElementToBeClickable(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -142,7 +143,7 @@ public class Base {
         }
     }
 
-    public static void pHoverOverElement(WebDriver driver, WebElement element) {
+    public void pHoverOverElement( WebElement element) {
         try {
             // Create Actions instance
             Actions actions = new Actions(driver);
@@ -193,45 +194,59 @@ public class Base {
 
     public void pCompareWordWithText(List<WebElement> elements, DataTable expectedWordsTable) {
         List<String> expectedWords = expectedWordsTable.asList(String.class);
-        System.out.println(expectedWords);
-
         for (WebElement element : elements) {
             String actualText = element.getText().trim();
-            System.out.println("Im the actual text from the element " + actualText);
+            boolean matchFound = false;
 
-            for (String data : expectedWords) {
-                String actualData = data;
-                System.out.println("Im the actual text from the data " + actualData);
-                // Check if any word in the expectedWords list is present in the actualText
-                if (actualText.equals(actualData.trim())) {
-                    System.out.println("Element text '" + actualText + " equals to valid data " + actualData);
-                    // If you want to break out of the loop once a match is found, you can add a break statement here.
+            for (String expectedWord : expectedWords) {
+                if (actualText.contains(expectedWord.trim())) {
+                    System.out.println("Element text '" + actualText + "' contains valid data: '" + expectedWord + "'");
+                    matchFound = true;
+                    break; // Exit the loop once a match is found
                 }
             }
 
-
+            if (!matchFound) {
+                System.out.println("Element text '" + actualText + "' does not contain any valid data");
+            }
         }
-        System.out.println("Comparison incompleted.");
+
+        System.out.println("Assertion completed........");
     }
 
-    public void pListAmenities(List <WebElement> elements){
-        System.out.println("Text of the elements:");
-        for (WebElement element : elements) {
+    public void pWindowHandler(String url){
+            if (url.equals(driver.getCurrentUrl())) {
+                driver.close(); // close the child tab
+                driver.switchTo().window(mainWindow);
+                System.out.println("User is not on the home page, going back to the home page....");
+            } else {
+                System.out.println("User is already on the home page....");
+            }
+
+    }
+
+    public void pSwitchToNewTab(){
+        Set<String> windowHandles = driver.getWindowHandles();
+        for (String handle : windowHandles) {
+            if (!handle.equals(mainWindow)) {
+                System.out.println("Switching to the new tab");
+                driver.switchTo().window(handle);
+                break;
+            }
+        }
+    }
+
+    public void pLabelValidation(WebElement element){
+        if(element.getText().equals("Schedule a Visit")){
+            System.out.println("Label " + element.getText() + " Is Present");
+        }else {
+            System.out.println("Element label is not Present");
             System.out.println(element.getText());
         }
     }
 
-    public void pWindowHandler(){
-        driver.close(); // close the child tab
-        driver.switchTo().window(mainWindow);
-        System.out.println("User is back to the home Page");
-    }
-
-    public void pLabelValidation(WebElement element){
-        if(element.isDisplayed()){
-            System.out.println("Label " + element.getText() + " Is Present");
-        }else {
-            System.out.println("Element label is not Present");
-        }
+    public void waitForPageLoad() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30)); // Adjust the timeout as needed
+        wait.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
     }
 }

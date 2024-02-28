@@ -7,11 +7,13 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/feature/mmandir.feature" , glue = "step_Definition" ,
-        //tags = "@regression",
+        tags = "@jelen",
         plugin = {
                 "pretty",
                 "json:target/cucumber-report/cucumber.json",
                 "html:target/cucumber-report/cucumber.html"}
+
+
 )
 
 public class TestRunner {

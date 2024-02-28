@@ -31,8 +31,6 @@ public class Home_Page_Elements {
     @FindBy(xpath = "(//div[@class='elementor-widget-container']/p/a)[1]")
     public WebElement pScheduleVisit;
 
-
-
     @FindBy(xpath = "//div[@class='paoc-popup-margin paoc-popup-mheading']")
     public WebElement pScheduleVisitLabel;
 

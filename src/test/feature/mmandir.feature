@@ -7,7 +7,20 @@ Feature: Home Page Form Validation and Navigation
         Then  the user should scroll to the Schedule a visit form to fill out the form "<firstname>","<lastname>","<email>","<mobile>","<Select_Gender>","<i_am>","<duration>",<date>,"<message>"
         And   the user will compare the text of the elements should match the following words:
             | expectedWords                                                                                                                                                                       |
-            |Free Wifi,FIRE SAFETY,LIFT FACILITY,CAR PARKING,24*7 ELECTRICITY,LAUNDRY,COOKING,AIR CONDITIONER,24*7 WATER,ELECTRICITY INCLUDED IN RENT,FRIDGE,GYSER,CCTV,TWO WHEELER PARKING|
+            |Free Wifi|
+            |FIRE SAFETY|
+            |LIFT FACILITY|
+            |CAR PARKING  |
+            |24*7 ELECTRICITY|
+            |LAUNDRY         |
+            |COOKING         |
+            |AIR CONDITIONER |
+            |24*7 WATER      |
+            |ELECTRICITY INCLUDED IN RENT|
+            |FRIDGE                      |
+            |GYSER                       |
+            |CCTV                        |
+            |TWO WHEELER PARKING         |
         Then The user will click on the logo to get to the home page again
 
         Examples:
@@ -16,10 +29,16 @@ Feature: Home Page Form Validation and Navigation
 
 
     Scenario: Validate Home Page Insta logo and form
-        Given the user is back to the home page
+        Given the user is on the home page
         Then The user will click on the instagram logo
         When The user is on instragram he would validate the logo
         And  The user should close the instagram page and go back to the home page
         When The user is back to the home page
         Then The user will click on the Schedule a visit
         And The user will validated the form label
+
+    @jelen
+    Scenario: Validate Hover
+        Given the user is on the home page jelen
+        Then The user will hover button
+        And Click on the button
