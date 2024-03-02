@@ -79,34 +79,10 @@ public class Base {
         return flag;
     }
 
-    public void getIframe(){
-        driver.switchTo().frame(0);
-    }
-
-    public void quitIframe(){
-        driver.switchTo().defaultContent();
-    }
-
-
     protected void waitForElementToBeVisible(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(element));
         System.out.println(element.getText() + " Is present.....");
-    }
-    protected void waitForElementToBeClickable(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-        //System.out.println(element + " Is present");
-    }
-
-
-    public void pSelect_Handle(WebElement element){
-        Random random = new Random();
-        // Generate a random number between 1 and 2 (inclusive)
-        int randomNumber = random.nextInt(2) + 1;
-        Select dropdown = new Select(element);
-        dropdown.selectByIndex(randomNumber);
-        System.out.println("Random number generated " + randomNumber);
     }
 
     public void pSelect_Handle(WebElement element, String value){
@@ -115,7 +91,7 @@ public class Base {
     }
 
 
-    public void pLogo_IsVisible(WebElement element){
+    public void pVisibility_Valitaion(WebElement element){
         try{
             waitForElementToBeVisible(element);
             if(element.isDisplayed()){
@@ -176,7 +152,7 @@ public class Base {
         }
     }
 
-    public void pElement_Highlighted(WebElement element){
+    public void pElement_Highlighted_Validation(WebElement element){
         try {
             String pNot_Highlighted = "rgba(255, 255, 255, 1)";
             if(element.getCssValue("color").equals(pNot_Highlighted)){

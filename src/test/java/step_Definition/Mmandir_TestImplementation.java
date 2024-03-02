@@ -34,12 +34,12 @@ public class Mmandir_TestImplementation extends Base {
 
     @Given("the user launches the home page application")
     public void the_user_launches_the_home_page_application() {
-        System.out.println("Browser sert, user navigating to Home Page.....");
+        System.out.println("Browser set, user navigating to Home Page.....");
     }
 
     @Then("the user validates the presence of the home page logo, mobile, email contact, and hover")
     public void the_user_validates_the_presence_of_the_home_page_logo_mobile_email_contact_and_hover() {
-        pLogo_IsVisible(hpe.pHomePage_Logo);
+        pVisibility_Valitaion(hpe.pHomePage_Logo);
         pData_Validation(hpe.pMobilePhone, pRead_Properties_Files("mobilephone"));
         pData_Validation(hpe.pEmail, pRead_Properties_Files("email"));
         pHoverOverElement(hpe.pG_Location_Button);
@@ -49,7 +49,7 @@ public class Mmandir_TestImplementation extends Base {
     public void the_user_clicks_on_manmandir_boys_hostel_should_be_navigated_to_the_details_page_for_manmandir_boys_hostel() {
         pClick(hpe.pmMandir_Boys_Button);
         pGet_Url(pRead_Properties_Files("Mmdir_url"));
-        pElement_Highlighted(mt.pG_Location_Button);
+        pElement_Highlighted_Validation(mt.pG_Location_Button);
     }
     @Then("the user should scroll to the Schedule a visit form to fill out the form {string},{string},{string},{string},{string},{string},{string},{int},{string}")
     public void the_user_should_scroll_to_the_schedule_a_visit_form_to_fill_out_the_form(String firstname, String lastname, String email, String mobile, String SelectGender, String iama, String duration, int date, String message) {
