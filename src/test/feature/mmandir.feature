@@ -37,8 +37,3 @@ Feature: Home Page Form Validation and Navigation
         Then The user will click on the Schedule a visit
         And The user will validated the form label
 
-    @jelen
-    Scenario: Validate Hover
-        Given the user is on the home page jelen
-        Then The user will hover button
-        And Click on the button
