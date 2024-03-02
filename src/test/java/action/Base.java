@@ -1,5 +1,9 @@
 package action;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 import io.cucumber.datatable.DataTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,8 +25,13 @@ import java.util.Set;
 public class Base {
     public  WebDriver driver = new ChromeDriver();
     String mainWindow;
+    ExtentSparkReporter spark;
+    public ExtentReports extent;
+    public ExtentTest logger;
 
     public void setDriver() {
+        ExtentReports();
+        logger = extent.createTest("Man Mandir Hostel Test");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         mainWindow = driver.getWindowHandle();
@@ -121,18 +130,10 @@ public class Base {
 
     public void pHoverOverElement( WebElement element) {
         try {
-            // Create Actions instance
             Actions actions = new Actions(driver);
-
-            // Move to the element to hover
             actions.moveToElement(element).perform();
-
-            // Add validation or further actions if needed after hover
-
             System.out.println("Successfully hovered over the element.");
-
         } catch (Exception e) {
-            // Handle any exceptions
             System.err.println("Error while hovering over the element: " + e.getMessage());
         }
     }
@@ -161,7 +162,6 @@ public class Base {
                 System.out.println("Element is Highlighted");
             }
         } catch (Exception e){
-            // Handle any exceptions
             System.err.println("Error while checking status of Element: " + e.getMessage());
         }
     }
@@ -181,7 +181,6 @@ public class Base {
                     break; // Exit the loop once a match is found
                 }
             }
-
             if (!matchFound) {
                 System.out.println("Element text '" + actualText + "' does not contain any valid data");
             }
@@ -222,7 +221,23 @@ public class Base {
     }
 
     public void waitForPageLoad() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30)); // Adjust the timeout as needed
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
+    }
+
+
+    //New method
+    public void ExtentReports(){
+        extent = new ExtentReports();
+        spark = new ExtentSparkReporter(System.getProperty("user.dir") + "/einfochips.html");
+        extent.attachReporter(spark);
+        extent.setSystemInfo("Host Name", "EinfoChips test");
+        extent.setSystemInfo("Environment", "Production");
+        extent.setSystemInfo("User Name", "Test Team");
+        spark.config().setDocumentTitle("EinfoChips Application QA ");
+        // Name of the report
+        spark.config().setReportName("EinfoChips Selenium testNG ");
+        // Dark Theme
+        spark.config().setTheme(Theme.STANDARD);
     }
 }

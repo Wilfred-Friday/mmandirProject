@@ -27,7 +27,7 @@ Feature: Home Page Form Validation and Navigation
             |firstname|lastname|email|mobile|Select_Gender|i_am|duration|date|message|
             |Sergio|Perez|spf1@gmail.com|123123123|Male|Other|More than 6 months|23|Testing automation|
 
-
+    @instagramTest
     Scenario: Validate Home Page Insta logo and form
         Given the user is on the home page
         Then The user will click on the instagram logo

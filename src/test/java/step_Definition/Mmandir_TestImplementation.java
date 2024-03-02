@@ -88,19 +88,18 @@ public class Mmandir_TestImplementation extends Base {
     }
     @When("The user is on instragram he would validate the logo")
     public void the_user_is_on_instragram_he_would_validate_the_logo() {
-       /* waitForPageLoad();
+       waitForPageLoad();
+        pSwitchToNewTab();
         pClick(ip.pClose);
         System.out.println("Button close");
         System.out.println("lOGO IS VISIBLE = " + ip.pInstaLogo.isDisplayed());
-        pLogo_IsVisible(ip.pInstaLogo);
-        */
+        pVisibility_Valitaion(ip.pInstaLogo);
         System.out.println("Logo validated....");
 
 
     }
     @When("The user should close the instagram page and go back to the home page")
     public void the_user_should_close_the_instagram_page_and_go_back_to_the_home_page() {
-        pSwitchToNewTab();
         pWindowHandler(pRead_Properties_Files("instaurl"));
     }
     @When("The user is back to the home page")
@@ -120,7 +119,8 @@ public class Mmandir_TestImplementation extends Base {
 
    @After
    public void pQuit(){
-        driver.close();
+       driver.close();
+       extent.flush();
     }
 
 
